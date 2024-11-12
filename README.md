@@ -33,6 +33,7 @@ classDiagram
 
 ## Diagrama de Uso
 ```
+
     Usuario1 --> (Cadastrar Usuários)
     Usuario1 --> (Cadastrar Tarefa)
     Usuario --> (Visualizar Tarefas)
@@ -43,25 +44,27 @@ classDiagram
     (Cadastrar Tarefa) --> (Visualizar e Adicionar Tarefas)
     (Atualizar Tarefa) --> (Alterar Status da Tarefa)
     (Atualizar Tarefa) --> (Alterar Prioridade da Tarefa)
+
 ```
 
 ## Diagrama de Uso
 ``` mermaid
-usecaseDiagram
-    actor Usuario as U
 
-    U --> (Cadastrar Usuários)
-    U --> (Cadastrar Tarefa)
-    U --> (Visualizar Tarefas)
-    U --> (Atualizar Tarefa)
-    U --> (Alterar Status da Tarefa)
-    U --> (Alterar Prioridade da Tarefa)
-    U --> (Editar atributos da Tarefa)
-    U --> (Excluir Tarefa)
-    
-    (Cadastrar Tarefa) --> (Visualizar e Adicionar Tarefas)
-    (Atualizar Tarefa) --> (Alterar Status da Tarefa)
-    (Atualizar Tarefa) --> (Alterar Prioridade da Tarefa)
+%%{ init: { "nodeSpacing": 50, "edgeSpacing": 20, "curve": "linear" } }%%
+graph TD
+    U[Usuário] -->|Cadastrar Usuário| UC1[Cadastro de Usuário]
+    U -->|Cadastrar Tarefa| UC2[Cadastrar Tarefa]
+    U -->|Visualizar Tarefas| UC3[Visualizar Tarefas]
+    U -->|Atualizar Tarefa| UC4[Atualizar Tarefa]
+    U -->|Alterar Status| UC5[Alterar Status da Tarefa]
+    U -->|Alterar Prioridade| UC6[Alterar Prioridade da Tarefa]
+    U -->|Editar Atributos| UC7[Editar Atributos da Tarefa]
+    U -->|Excluir Tarefa| UC8[Excluir Tarefa]
+
+    UC2 -->|Relacionamento| UC3
+    UC4 -->|Relacionamento| UC5
+    UC4 -->|Relacionamento| UC6
+
 ```
 
 ## ScriptDB - PostgreSQL
