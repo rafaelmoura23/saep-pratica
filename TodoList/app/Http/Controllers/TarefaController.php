@@ -8,25 +8,28 @@ use Illuminate\Http\Request;
 
 class TarefaController extends Controller
 {
+    // mostrar as tarefas
     public function index()
     {
         $tarefas = Tarefa::with('usuario')->get();
         return view('tarefas.index', compact('tarefas'));
     }
 
+    // criar tarefa
     public function create()
     {
         $usuarios = Usuario::all();
         return view('tarefas.create', compact('usuarios'));
     }
 
+    // armazenar tarefas
     public function store(Request $request)
     {
         Tarefa::create($request->all());
         return redirect()->route('tarefas.index');
     }
 
-     // Formulário para editar tarefa
+     // formulário para editar tarefa
      public function edit($id)
      {
          $tarefa = Tarefa::findOrFail($id);
@@ -34,7 +37,7 @@ class TarefaController extends Controller
          return view('tarefas.edit', compact('tarefa', 'usuarios'));
      }
  
-     // Método para Atualizar a Tarefa
+     // método para atualizar a tarefa levando o id
      public function update(Request $request, $id)
      {
          // validação dos dados
@@ -53,7 +56,7 @@ class TarefaController extends Controller
          return redirect()->route('tarefas.index')->with('success', 'Tarefa atualizada com sucesso!'); // mostrar mensagem
      }
  
-     // Excluir tarefa
+     // excluir tarefa
      public function destroy($id)
      {
          $tarefa = Tarefa::findOrFail($id);

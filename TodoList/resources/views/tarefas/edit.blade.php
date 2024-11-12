@@ -2,6 +2,23 @@
 
 @section('content')
     <h1>Editar Tarefa</h1>
+
+    <!-- Mensagem de Sucesso ou Erro -->
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @elseif($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+    
+    {{-- formulário para atualização dos itens --}}
     <form action="{{ route('tarefas.update', $tarefa->id) }}" method="POST">
         @csrf
         @method('PUT') {{-- Método Atualizar --}}

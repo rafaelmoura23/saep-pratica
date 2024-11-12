@@ -11,6 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // criando a tabela tarefas com os atributos id, setor, prioridade, descricao, status, idusuario e data
         Schema::create('tarefas', function (Blueprint $table) {
             $table->id();
             $table->string('descricao');

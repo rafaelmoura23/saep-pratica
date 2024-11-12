@@ -11,6 +11,7 @@ class Usuario extends Model
 
     protected $fillable = ['nome', 'email'];
 
+    // relação com a tabela tarefas
     public function tarefas()
     {
         return $this->hasMany(Tarefa::class);

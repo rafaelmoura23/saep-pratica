@@ -9,8 +9,10 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
+
     public function up(): void
     {
+        // criando a tabela usuario com id, nome e email
         Schema::create('usuarios', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
@@ -19,7 +21,6 @@ return new class extends Migration
         });
     }
 
-    
 
     /**
      * Reverse the migrations.

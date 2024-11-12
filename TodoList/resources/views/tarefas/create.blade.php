@@ -18,17 +18,19 @@
         </div>
     @endif
 
-
+        {{-- Formulário para criar Tarefa --}}
     <form action="{{ route('tarefas.store') }}" method="POST">
         @csrf
         <input type="text" name="descricao" placeholder="Descrição" required>
-        <input type="text" name="setor" placeholder="Setor">
+        <input type="text" name="setor" placeholder="Setor" required>
         <select name="prioridade" required>
             <option value="baixa">Baixa</option>
             <option value="média">Média</option>
             <option value="alta">Alta</option>
         </select>
-        <select name="usuario_id" required>
+        <select name="usuario_id" required> 
+            {{-- Buscar os usuário na tabela usuarios --}}
+            {{-- mostrar nome - cadastrar id no banco --}}
             @foreach ($usuarios as $usuario)
                 <option value="{{ $usuario->id }}">{{ $usuario->nome }}</option>
             @endforeach

@@ -7,14 +7,17 @@ use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
 {
+    // criar um usuario
     public function create()
     {
         return view('usuarios.create');
     }
 
+
+    // armazenar os usuários
     public function store(Request $request)
     {
-        // Validação do formulário
+        // validação do formulário
         $request->validate(
             [
                 'nome' => 'required|string|max:255',
@@ -33,7 +36,7 @@ class UsuarioController extends Controller
             'email' => $request->email,
         ]);
 
-        // Mensagem de sucess
+        // Mensagem
         return redirect()->route('usuarios.create')->with('success', 'Cadastro realizado com sucesso!');
     }
 }

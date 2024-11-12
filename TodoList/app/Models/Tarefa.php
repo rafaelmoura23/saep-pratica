@@ -11,6 +11,7 @@ class Tarefa extends Model
 
     protected $fillable = ['descricao', 'setor', 'prioridade', 'status', 'usuario_id'];
 
+    // iusuario 
     public function usuario()
     {
         return $this->belongsTo(Usuario::class);

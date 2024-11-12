@@ -20,7 +20,7 @@ classDiagram
         +String setor
         +String prioridade  // baixa, média, alta
         +Date dataCadastro
-        +String status      // *a fazer, fazendo, pronto
+        +String status     // *a fazer, fazendo, pronto
         +atualizarStatus()
         +atualizarPrioridade()
     }
@@ -56,14 +56,14 @@ CREATE TABLE Usuario (
 
 -- Tabela Tarefa
 CREATE TABLE Tarefa (
-    id SERIAL PRIMARY KEY,  -- ID da tarefa (auto-incrementável)
-    id_usuario INT NOT NULL,  -- ID do usuário que criou a tarefa
+    id SERIAL PRIMARY KEY,  
+    id_usuario INT NOT NULL,
     descricao TEXT NOT NULL, 
     setor VARCHAR(255) NOT NULL,
     prioridade VARCHAR(50) NOT NULL,  -- Prioridade (baixa, média, alta)
     dataCadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
     status VARCHAR(50) DEFAULT 'a fazer',
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE  -- Relacionamento com Usuario (FK)
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE  -- (FK)
 );
 
 ```
