@@ -31,21 +31,7 @@ classDiagram
 - Usuario (1,1) - cada tarefa é sempre associada a um único usuário.
 - Tarefa (0,n) - um usuário pode estar associado a várias tarefas (0 ou mais).
 
-## Diagrama de Uso
-```
 
-    Usuario1 --> (Cadastrar Usuários)
-    Usuario1 --> (Cadastrar Tarefa)
-    Usuario --> (Visualizar Tarefas)
-    Usuario --> (Atualizar Tarefa)
-    Usuario --> (Alterar Status da Tarefa)
-    Usuario --> (Alterar Prioridade da Tarefa)
-    
-    (Cadastrar Tarefa) --> (Visualizar e Adicionar Tarefas)
-    (Atualizar Tarefa) --> (Alterar Status da Tarefa)
-    (Atualizar Tarefa) --> (Alterar Prioridade da Tarefa)
-
-```
 
 ## Diagrama de Uso
 ``` mermaid
@@ -61,14 +47,13 @@ graph TD
     U -->|Editar Atributos| UC7[Editar Atributos da Tarefa]
     U -->|Excluir Tarefa| UC8[Excluir Tarefa]
 
-    UC2 -->|Relacionamento| UC3
-    UC4 -->|Relacionamento| UC5
-    UC4 -->|Relacionamento| UC6
-
 ```
 
 ## ScriptDB - PostgreSQL
 ``` sql
+-- Banco de dados
+CREATE DATABASE todo_saep;
+
 -- Tabela Usuario
 CREATE TABLE Usuario (
     id SERIAL PRIMARY KEY,
@@ -87,5 +72,79 @@ CREATE TABLE Tarefa (
     status VARCHAR(50) DEFAULT 'a fazer',
     FOREIGN KEY (id_usuario) REFERENCES Usuario(id) ON DELETE CASCADE  -- (FK)
 );
+```
+
+## Migrations
+``` php
+# Usuarios
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+
+    public function up(): void
+    {
+        // criando a tabela usuario com id, nome e email
+        Schema::create('usuarios', function (Blueprint $table) {
+            $table->id();
+            $table->string('nome');
+            $table->string('email')->unique();
+            $table->timestamps();
+        });
+    }
+
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('usuarios');
+    }
+};
+```
+
+``` php
+# Tarefas
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        // criando a tabela tarefas com os atributos id, setor, prioridade, descricao, status, idusuario e data
+        Schema::create('tarefas', function (Blueprint $table) {
+            $table->id();
+            $table->string('descricao');
+            $table->string('setor');
+            $table->enum('prioridade', ['baixa', 'média', 'alta']);
+            $table->enum('status', ['a fazer', 'fazendo', 'pronto'])->default('a fazer');
+            $table->foreignId('usuario_id')->constrained('usuarios')->onDelete('cascade');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('tarefas');
+    }
+};
 
 ```
