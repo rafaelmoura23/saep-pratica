@@ -45,6 +45,25 @@ classDiagram
     (Atualizar Tarefa) --> (Alterar Prioridade da Tarefa)
 ```
 
+## Diagrama de Uso
+``` mermaid
+usecaseDiagram
+    actor Usuario as U
+
+    U --> (Cadastrar Usuários)
+    U --> (Cadastrar Tarefa)
+    U --> (Visualizar Tarefas)
+    U --> (Atualizar Tarefa)
+    U --> (Alterar Status da Tarefa)
+    U --> (Alterar Prioridade da Tarefa)
+    U --> (Editar atributos da Tarefa)
+    U --> (Excluir Tarefa)
+    
+    (Cadastrar Tarefa) --> (Visualizar e Adicionar Tarefas)
+    (Atualizar Tarefa) --> (Alterar Status da Tarefa)
+    (Atualizar Tarefa) --> (Alterar Prioridade da Tarefa)
+```
+
 ## ScriptDB - PostgreSQL
 ``` sql
 -- Tabela Usuario
