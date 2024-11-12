@@ -27,7 +27,7 @@
                 {{-- Comparando o status e adicionando na primeira coluna --}}
                     @if ($tarefa->status == 'a fazer') 
                         <div class="card mb-3 p-3 border">
-                            <h5>{{ $tarefa->descricao }}</h5>
+                            <h5 class="text-center">{{ $tarefa->descricao }}</h5>
                             <p><strong>Status:</strong> {{ $tarefa->status }}</p>
                             <p><strong>Prioridade:</strong> {{ $tarefa->prioridade }}</p>
                             <p><strong>Setor:</strong> {{ $tarefa->setor }}</p>
